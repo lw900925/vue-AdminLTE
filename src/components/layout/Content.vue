@@ -23,3 +23,22 @@
   </div>
   <!-- /.content-wrapper -->
 </template>
+
+<script>
+  import Router from '@/router/index';
+
+  export default {
+    name: 'content',
+    mounted: function () {
+      // 默认跳转到dashboard
+      Router.push({path: '/dashboard'});
+
+      this.$nextTick(function () {
+        $('body').removeClass('login-page').addClass('skin-blue sidebar-mini');
+      });
+    }
+  }
+
+
+</script>
+

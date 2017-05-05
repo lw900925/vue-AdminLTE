@@ -24,4 +24,25 @@ new Vue({
   router,
   template: '<App />',
   components: { App }
-})
+});
+
+router.beforeEach((to, from, next) => {
+  // 判断跳转的目标路由是否有登陆权限
+  if (to.meta.auth) {
+    // 检查是否有token信息
+    console.log(sessionStorage.getItem('TOKEN'));
+    if (sessionStorage.getItem('TOKEN')) {
+      next();
+    } else {
+      next({
+        path: '/login',
+        query: {
+          redirect: to.fullPath
+        }
+      });
+    }
+
+  } else {
+    next();
+  }
+});

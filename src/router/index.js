@@ -28,7 +28,10 @@ export default new VueRouter({
       children: [
         {
           path: '/dashboard',
-          component: Dashboard
+          component: Dashboard,
+          meta: {
+            auth: true
+          }
         }
       ]
     },
