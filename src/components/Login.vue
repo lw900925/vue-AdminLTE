@@ -50,16 +50,13 @@
   export default {
     name: 'login',
     mounted: function () {
-      console.log($('input[type="checkbox"]').html())
+      this.$nextTick(function () {
+        $('input[type="checkbox"]').iCheck({
+          checkboxClass: 'icheckbox_square-blue',
+          radioClass: 'iradio_square-blue',
+          increaseArea: '20%' // optional
+        });
+      });
     }
   }
-
-  /*$(document).ready(function () {
-    $('input[type="checkbox"]').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' // optional
-    });
-  })*/
-
 </script>

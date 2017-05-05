@@ -14,7 +14,14 @@
 
 <script>
   export default {
-    name: 'app'
+    name: 'app',
+    mounted: function () {
+      this.$nextTick(function () {
+        if ($.AdminLTE.layout) {
+            $.AdminLTE.layout.fix();
+        }
+      });
+    }
   }
 </script>
 
