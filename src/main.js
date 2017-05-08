@@ -16,7 +16,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
@@ -30,7 +30,6 @@ router.beforeEach((to, from, next) => {
   // 判断跳转的目标路由是否有登陆权限
   if (to.meta.auth) {
     // 检查是否有token信息
-    console.log(sessionStorage.getItem('TOKEN'));
     if (sessionStorage.getItem('TOKEN')) {
       next();
     } else {
@@ -41,7 +40,6 @@ router.beforeEach((to, from, next) => {
         }
       });
     }
-
   } else {
     next();
   }

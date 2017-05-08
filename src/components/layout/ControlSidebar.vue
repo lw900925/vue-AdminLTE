@@ -75,3 +75,15 @@
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
 </template>
+
+<script>
+  export default {
+    name: 'controlSidebar',
+    mounted: function () {
+      this.$nextTick(function () {
+        // 激活AdminLTE controlSidebar
+        $.AdminLTE.controlSidebar.activate();
+      });
+    }
+  }
+</script>

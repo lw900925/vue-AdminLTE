@@ -35,10 +35,10 @@
 
       this.$nextTick(function () {
         $('body').removeClass('login-page').addClass('skin-blue sidebar-mini');
+        if ($.AdminLTE.layout) {
+            $.AdminLTE.layout.fix();
+        }
       });
     }
   }
-
-
 </script>
-
