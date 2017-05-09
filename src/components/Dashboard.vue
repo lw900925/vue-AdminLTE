@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <h3>Dashboard</h3>
-    <span>Hello Vue</span>
-  </div>
+    <div>仪表盘</div>
 </template>
 
 <script>

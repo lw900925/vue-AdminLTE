@@ -1,20 +1,8 @@
 <template>
-  <div>
-    <!-- Content Header (Page header) -->
-    <content-header header="工厂管理"></content-header>
-
-    <!-- Main content -->
-    <section class="content">
-      <!-- Your Page Content Here -->
-
-    </section>
-    <!-- /.content -->
-  </div>
+    <div>工厂管理</div>
 </template>
 
 <script>
 
-  export default {
-
-  }
+    export default {}
 </script>
