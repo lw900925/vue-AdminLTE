@@ -5,7 +5,7 @@
 (function( factory ){
 	if ( typeof define === 'function' && define.amd ) {
 		// AMD
-		define( ['jquery', 'datatables.net-bs', 'datatables.net-editor'], function ( $ ) {
+		define( ['jquery', 'datatables.net-bs'], function ( $ ) {
 			return factory( $, window, document );
 		} );
 	}
@@ -18,10 +18,6 @@
 
 			if ( ! $ || ! $.fn.dataTable ) {
 				$ = require('datatables.net-bs')(root, $).$;
-			}
-
-			if ( ! $.fn.dataTable.Editor ) {
-				require('datatables.net-editor')(root, $);
 			}
 
 			return factory( $, root, root.document );
@@ -37,7 +33,7 @@ var DataTable = $.fn.dataTable;
 
 
 /*
- * Set the default display controller to be our bootstrap control 
+ * Set the default display controller to be our bootstrap control
  */
 DataTable.Editor.defaults.display = "bootstrap";
 
