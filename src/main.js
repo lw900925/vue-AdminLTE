@@ -9,8 +9,12 @@ import '@/plugins/iCheck-1.0.1/all.css';
 import '@/plugins/DataTables-1.10.13/media/css/dataTables.bootstrap.min.css';
 import '@/plugins/DataTables-1.10.13/extensions/Buttons/css/buttons.dataTables.min.css';
 import '@/plugins/DataTables-1.10.13/extensions/Buttons/css/buttons.bootstrap.min.css';
+import '@/plugins/DataTables-1.10.13/extensions/Select/css/select.dataTables.min.css';
 import '@/plugins/DataTables-1.10.13/extensions/Select/css/select.bootstrap.min.css';
-import '@/plugins/DataTables-1.10.13/extensions/Scroller/css/scroller.bootstrap.css';
+import '@/plugins/DataTables-1.10.13/extensions/Scroller/css/scroller.dataTables.min.css';
+import '@/plugins/DataTables-1.10.13/extensions/Scroller/css/scroller.bootstrap.min.css';
+import '@/plugins/DataTables-1.10.13/extensions/Responsive/css/responsive.dataTables.min.css';
+import '@/plugins/DataTables-1.10.13/extensions/Responsive/css/responsive.bootstrap.min.css';
 import '@/plugins/DataTables-1.10.13/extensions/Editor-1.6.1/css/editor.bootstrap.min.css';
 import '@/plugins/select2-4.0.3/css/select2.min.css';
 
@@ -28,6 +32,8 @@ import '@/plugins/DataTables-1.10.13/extensions/Buttons/js/buttons.html5.min';
 import '@/plugins/DataTables-1.10.13/extensions/Buttons/js/buttons.print.min';
 import '@/plugins/DataTables-1.10.13/extensions/Select/js/dataTables.select.min';
 import '@/plugins/DataTables-1.10.13/extensions/Scroller/js/dataTables.scroller.min';
+import '@/plugins/DataTables-1.10.13/extensions/Responsive/js/dataTables.responsive.min';
+import '@/plugins/DataTables-1.10.13/extensions/Responsive/js/responsive.bootstrap.min';
 import '@/plugins/DataTables-1.10.13/extensions/Editor-1.6.1/js/dataTables.editor.min';
 import '@/plugins/DataTables-1.10.13/extensions/Editor-1.6.1/js/editor.bootstrap.min';
 import '@/plugins/select2-4.0.3/js/select2.full.min'
@@ -38,6 +44,9 @@ import router from './router';
 
 // 引入自定义指令
 import MyDirective from '@/directives/my-directive';
+
+// 引入自定义组件
+import ContentHeader from '@/components/layout/ContentHeader';
 
 Vue.config.productionTip = false;
 
@@ -63,6 +72,9 @@ router.beforeEach((to, from, next) => {
 
 // 绑定Vue自定义指令
 Vue.directive(MyDirective.name, MyDirective);
+
+// 绑定Vue自定义组件
+Vue.component(ContentHeader.name, ContentHeader);
 
 /* eslint-disable no-new */
 new Vue({

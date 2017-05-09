@@ -19,8 +19,8 @@ import PageNotFound from '@/components/PageNotFound';
 import Enterprise from '@/components/base/Enterprise';
 import Factory from '@/components/base/Factory';
 
-import Prize from '@/components/activity/Prize';
-import Weixin from '@/components/activity/Weixin';
+import Prize from '@/components/promotion/Prize';
+import Weixin from '@/components/promotion/Weixin';
 
 Vue.use(VueRouter);
 
@@ -54,11 +54,11 @@ export default new VueRouter({
 
         // 营销活动
         {
-          path: '/activity/prize',
+          path: '/promotion/prize',
           component: Prize
         },
         {
-          path: '/activity/weixin',
+          path: '/promotion/weixin',
           component: Weixin
         }
       ]

@@ -54,17 +54,17 @@
           </ul>
         </li>
 
-        <li class="treeview" :class="{'active': treeview == 'activity'}">
+        <li class="treeview" :class="{'active': treeview == 'promotion'}">
           <a href="#"><i class="fa fa-ticket"></i> <span>营销活动</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <router-link tag="li" active-class="active" to="/activity/prize">
+            <router-link tag="li" active-class="active" to="/promotion/prize">
               <a><i class="fa fa-gift"></i> <span>企业奖品</span></a>
             </router-link>
-            <router-link tag="li" active-class="active" to="/activity/weixin">
+            <router-link tag="li" active-class="active" to="/promotion/weixin">
               <a><i class="fa fa-weixin"></i> <span>微信公众号</span></a>
             </router-link>
           </ul>
