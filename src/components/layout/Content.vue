@@ -15,7 +15,6 @@
 
     <!-- Main content -->
     <section class="content">
-
       <!-- Your Page Content Here -->
       <router-view></router-view>
     </section>
@@ -25,20 +24,19 @@
 </template>
 
 <script>
-  import Router from '@/router/index';
-
   export default {
     name: 'content',
     mounted: function () {
-      // 默认跳转到dashboard
-      Router.push({path: '/dashboard'});
-
       this.$nextTick(function () {
         $('body').removeClass('login-page').addClass('skin-blue sidebar-mini');
         if ($.AdminLTE.layout) {
             $.AdminLTE.layout.fix();
         }
       });
+
+      if (this.$route.path == '/') {
+        this.$router.push('/dashboard');
+      }
     }
   }
 </script>

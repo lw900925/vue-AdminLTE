@@ -82,7 +82,9 @@
     mounted: function () {
       this.$nextTick(function () {
         // 激活AdminLTE controlSidebar
-        $.AdminLTE.controlSidebar.activate();
+        if ($.AdminLTE.controlSidebar) {
+          $.AdminLTE.controlSidebar.activate();
+        }
       });
     }
   }

@@ -24,7 +24,7 @@
           </div>
           <!-- /.col -->
           <div class="col-xs-4">
-            <button type="submit" class="btn btn-primary btn-block btn-flat" v-on:click="login()">登录</button>
+            <button type="submit" class="btn btn-primary btn-block btn-flat" @click="login()">登录</button>
           </div>
           <!-- /.col -->
         </div>
@@ -40,19 +40,16 @@
 
       <a href="javascript: void(0)">忘记密码</a><br>
       <a href="javascript: void(0)" class="text-center">注册新用户</a>
-
     </div>
     <!-- /.login-box-body -->
   </div>
 </template>
 
 <script>
-  import Router from '@/router/index';
-
   export default {
     name: 'login',
     data: function () {
-      return { email: 'lw900925@163.com', password: '123456' }
+      return {email: 'lw900925@163.com', password: '123456'}
     },
     mounted: function () {
       this.$nextTick(function () {
@@ -69,13 +66,14 @@
     },
     methods: {
       login: function () {
-        console.log('--- Login info ---');
-        console.log('Email: ' + this.email);
-        console.log('Password: ' + this.password);
+        // 将登录信息存储到sessionStorage中
+        sessionStorage.setItem('token', new Date().getTime());
 
-        sessionStorage.setItem('TOKEN', new Date().getTime());
-
-        Router.push({path: '/dashboard'});
+        var redirect = '/dashboard';
+        if (this.$route.query.redirect) {
+          redirect = this.$route.query.redirect;
+        }
+        this.$router.push(redirect);
       }
     }
   }

@@ -34,18 +34,39 @@
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
         <router-link tag="li" active-class="active" to="/dashboard">
-          <a><i class="fa fa-link"></i> <span>Link</span></a>
+          <a><i class="fa fa-dashboard"></i> <span>仪表盘</span></a>
         </router-link>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+
+        <li class="treeview" :class="{ 'active' : treeview == 'base' }">
+          <a href="#"><i class="fa fa-database"></i> <span>基础信息管理</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+
+          <ul class="treeview-menu">
+            <router-link tag="li" active-class="active" to="/base/enterprise">
+              <a><i class="fa fa-building-o"></i> <span>企业基本信息</span></a>
+            </router-link>
+            <router-link tag="li" active-class="active" to="/base/factory">
+              <a><i class="fa fa-cubes"></i> <span>工厂管理</span></a>
+            </router-link>
+          </ul>
+        </li>
+
+        <li class="treeview" :class="{'active': treeview == 'activity'}">
+          <a href="#"><i class="fa fa-ticket"></i> <span>营销活动</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
+            <router-link tag="li" active-class="active" to="/activity/prize">
+              <a><i class="fa fa-gift"></i> <span>企业奖品</span></a>
+            </router-link>
+            <router-link tag="li" active-class="active" to="/activity/weixin">
+              <a><i class="fa fa-weixin"></i> <span>微信公众号</span></a>
+            </router-link>
           </ul>
         </li>
       </ul>
@@ -56,9 +77,20 @@
 </template>
 
 <script>
+  export default {
+    data: function () {
+      var treeview = null;
 
+      // 从路由中获取当前路径
+      var path = this.$route.path;
+
+      if (path.startsWith('/')) {
+        path = path.substring(1, path.length);
+        treeview = path.split('/')[0];
+      }
+
+      return { treeview: treeview }
+    }
+  }
 </script>
 
-<style>
-
-</style>
