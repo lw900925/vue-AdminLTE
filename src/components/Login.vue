@@ -70,7 +70,7 @@
                 // 将登录信息存储到sessionStorage中
                 sessionStorage.setItem('token', new Date().getTime());
 
-                var redirect = '/dashboard';
+                let redirect = '/dashboard';
                 if (this.$route.query.redirect) {
                     redirect = this.$route.query.redirect;
                 }

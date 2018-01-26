@@ -156,7 +156,7 @@
                                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="javascript:;" class="btn btn-default btn-flat" v-on:click="logout">登出</a>
                                 </div>
                             </li>
                         </ul>
@@ -173,7 +173,14 @@
 
 <script>
     export default {
-        name: 'header'
+        name: 'header',
+        methods: {
+            // 清理token并跳转到登陆页面
+            logout: function (e) {
+                sessionStorage.removeItem("token");
+                this.$router.push("/login");
+            }
+        }
     }
 </script>
 

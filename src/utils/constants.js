@@ -5,7 +5,7 @@ export default {
     api: 'http://localhost:8080/api',
 
     datatables: {
-        dom: '<\'row\'<\'col-xs-8\'B><\'col-xs-4\'f>><\'row\'<\'col-xs-12\'tr>><\'row\'<\'col-xs-3\'l><\'col-xs-3\'i><\'col-xs-6\'p>>',
+        dom: "<'row'<'col-xs-8'B><'col-xs-4'f>><'row'<'col-xs-12'tr>><'row'<'col-xs-3'l><'col-xs-3'i><'col-xs-6'p>>",
         editor: {
             i18n: {
                 zh_CN: {

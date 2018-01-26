@@ -22,9 +22,10 @@
                 <div class="input-group">
                     <input type="text" name="q" class="form-control" placeholder="Search...">
                     <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
+                        <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
                 </div>
             </form>
             <!-- /.search form -->
@@ -37,11 +38,12 @@
                     <a><i class="fa fa-dashboard"></i> <span>仪表盘</span></a>
                 </router-link>
 
-                <li class="treeview" :class="{ 'active' : treeview == 'base' }">
-                    <a href="#"><i class="fa fa-database"></i> <span>基础信息管理</span>
+                <li class="treeview" :class="{ 'active' : treeview === 'base' }">
+                    <a href="#">
+                        <i class="fa fa-database"></i> <span>基础信息管理</span>
                         <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
                     </a>
 
                     <ul class="treeview-menu">
@@ -54,11 +56,12 @@
                     </ul>
                 </li>
 
-                <li class="treeview" :class="{'active': treeview == 'promotion'}">
-                    <a href="#"><i class="fa fa-ticket"></i> <span>营销活动</span>
+                <li class="treeview" :class="{'active': treeview === 'promotion'}">
+                    <a href="#">
+                        <i class="fa fa-ticket"></i> <span>营销活动</span>
                         <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
                     </a>
                     <ul class="treeview-menu">
                         <router-link tag="li" active-class="active" to="/promotion/prize">

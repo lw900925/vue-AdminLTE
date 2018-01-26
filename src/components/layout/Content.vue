@@ -31,7 +31,7 @@
                 }
             });
 
-            if (this.$route.path == '/') {
+            if (this.$route.path === '/') {
                 this.$router.push('/dashboard');
             }
         }
