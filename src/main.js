@@ -37,12 +37,12 @@ import '@/plugins/select2-4.0.3/js/select2.full.min'
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import axios from './axios'
 
 // 引入自定义指令
 import MyDirective from '@/directives/my-directive'
 
-// 引入自定义组件
-
+// Vue global settings
 Vue.config.productionTip = false
 
 // 全局路由拦截事件
@@ -73,6 +73,7 @@ Vue.directive(MyDirective.name, MyDirective)
 new Vue({
     el: '#app',
     router,
+    axios,
     template: '<App />',
     components: {App}
 })
