@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import Constants from 'utils/constants'
 
 // vue-axios global settings
-axios.defaults.baseURL = 'http://localhost:8080'
+axios.defaults.baseURL = Constants.api.baseURI
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 
 axios.interceptors.request.use(config => {

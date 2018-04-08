@@ -2,7 +2,11 @@
  * Created by liuwei on 2017/5/8.
  */
 export default {
-    api: 'http://localhost:8080/api',
+
+    api: {
+        baseURI: 'http://localhost:8080',
+    },
+
 
     datatables: {
         dom: "<'row'<'col-xs-8'B><'col-xs-4'f>><'row'<'col-xs-12'tr>><'row'<'col-xs-3'l><'col-xs-3'i><'col-xs-6'p>>",
