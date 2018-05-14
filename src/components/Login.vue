@@ -9,7 +9,7 @@
 
             <form action="javascript: void(0)" method="post">
                 <div class="form-group has-feedback">
-                    <input type="email" class="form-control" v-model="email" placeholder="电子邮箱">
+                    <input type="text" class="form-control" v-model="username" placeholder="用户名">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
@@ -47,10 +47,12 @@
 </template>
 
 <script>
+    import Constants from '@/utils/constants'
+
     export default {
         name: 'login',
         data: function () {
-            return {email: 'lw900925@163.com', password: '123456'}
+            return {username: "", password: ""}
         },
         mounted: function () {
             this.$nextTick(function () {
@@ -67,14 +69,29 @@
         },
         methods: {
             login: function () {
-                // 将登录信息存储到sessionStorage中
-                sessionStorage.setItem('token', new Date().getTime());
+                const params = "grant_type=password&scope=" + Constants.api.oauth2.scope +"&username=" + this.username + "&password=" + this.password
+                this.$http.post("/oauth/token?" + params, null, {
+                    auth: {
+                        username: Constants.api.oauth2.clientId,
+                        password: Constants.api.oauth2.clientSecret
+                    },
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+                    }
+                }).then(response => {
+                    // 将登录信息存储到cookie中
+                    var access_token = response.data[Constants.api.tokenKey]
+                    this.$cookies.set(Constants.api.tokenKey, access_token, 0)
 
-                let redirect = '/dashboard';
-                if (this.$route.query.redirect) {
-                    redirect = this.$route.query.redirect;
-                }
-                this.$router.push(redirect);
+                    // 登录完成后跳转
+                    let redirect = '/dashboard';
+                    if (this.$route.query.redirect) {
+                        redirect = this.$route.query.redirect;
+                    }
+                    this.$router.push(redirect);
+                }).catch(error => {
+                    console.error(error)
+                })
             }
         }
     }

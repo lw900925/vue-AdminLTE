@@ -35,9 +35,13 @@ import '@/plugins/DataTables-1.10.13/extensions/Editor-1.6.1/js/editor.bootstrap
 import '@/plugins/select2-4.0.3/js/select2.full.min'
 
 import Vue from 'vue'
+import VueCookies from 'vue-cookies'
 import App from './App'
 import router from './router'
 import axios from './axios'
+import Constants from "@/utils/constants"
+
+Vue.use(VueCookies)
 
 // 引入自定义指令
 import MyDirective from '@/directives/my-directive'
@@ -50,7 +54,7 @@ router.beforeEach((to, from, next) => {
     // 判断跳转的目标路由是否有登陆权限
     if (!to.meta.ignore) {
         // 检查是否有token信息
-        if (sessionStorage.getItem('token')) {
+        if (window.$cookies.isKey(Constants.api.tokenKey)) {
             next()
         } else {
             next({

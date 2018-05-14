@@ -2,11 +2,15 @@
  * Created by liuwei on 2017/5/8.
  */
 export default {
-
     api: {
         baseURI: 'http://localhost:8080',
+        oauth2: {
+            clientId: "94984796",
+            clientSecret: "5ldDM0uAAsCjW5ZN",
+            scope: "app"
+        },
+        tokenKey: "access_token"
     },
-
 
     datatables: {
         dom: "<'row'<'col-xs-8'B><'col-xs-4'f>><'row'<'col-xs-12'tr>><'row'<'col-xs-3'l><'col-xs-3'i><'col-xs-6'p>>",
