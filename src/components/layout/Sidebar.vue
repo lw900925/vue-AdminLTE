@@ -72,6 +72,20 @@
                         </router-link>
                     </ul>
                 </li>
+
+                <li class="treeview" :class="{'active': treeview === 'system'}">
+                    <a href="#">
+                        <i class="fa fa-cogs"></i> <span>系统管理</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <router-link tag="li" active-class="active" to="/system/user">
+                            <a><i class="fa fa-user"></i> <span>用户</span></a>
+                        </router-link>
+                    </ul>
+                </li>
             </ul>
             <!-- /.sidebar-menu -->
         </section>
