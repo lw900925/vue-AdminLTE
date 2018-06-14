@@ -1,11 +1,9 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+// Import css
 import '@/plugins/bootstrap-3.3.6/css/bootstrap.min.css'
 import '@/plugins/font-awesome-4.6.3/css/font-awesome.min.css'
 import '@/plugins/ionicons-2.0.0/css/ionicons.min.css'
-import '@/plugins/AdminLTE-2.3.11/css/AdminLTE.min.css'
-import '@/plugins/AdminLTE-2.3.11/css/skins/_all-skins.min.css'
-import '@/plugins/iCheck-1.0.1/all.css'
 import '@/plugins/DataTables-1.10.13/media/css/dataTables.bootstrap.min.css'
 import '@/plugins/DataTables-1.10.13/extensions/Buttons/css/buttons.dataTables.min.css'
 import '@/plugins/DataTables-1.10.13/extensions/Buttons/css/buttons.bootstrap.min.css'
@@ -14,8 +12,12 @@ import '@/plugins/DataTables-1.10.13/extensions/Select/css/select.bootstrap.min.
 import '@/plugins/DataTables-1.10.13/extensions/Scroller/css/scroller.dataTables.min.css'
 import '@/plugins/DataTables-1.10.13/extensions/Scroller/css/scroller.bootstrap.min.css'
 import '@/plugins/DataTables-1.10.13/extensions/Editor-1.6.1/css/editor.bootstrap.min.css'
+import '@/plugins/iCheck-1.0.1/all.css'
 import '@/plugins/select2-4.0.3/css/select2.min.css'
+import '@/plugins/AdminLTE-2.3.11/css/AdminLTE.min.css'
+import '@/plugins/AdminLTE-2.3.11/css/skins/_all-skins.min.css'
 
+// import javascript
 import '@/plugins/jQuery-2.2.3/jquery.min'
 import '@/plugins/bootstrap-3.3.6/js/bootstrap.min'
 import '@/plugins/AdminLTE-2.3.11/js/app.min'
@@ -41,10 +43,10 @@ import router from './router'
 import axios from './axios'
 import Constants from "@/utils/constants"
 
-Vue.use(VueCookies)
-
 // 引入自定义指令
 import MyDirective from '@/directives/my-directive'
+
+Vue.use(VueCookies)
 
 // Vue global settings
 Vue.config.productionTip = false
