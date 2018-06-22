@@ -24,43 +24,50 @@
 <script>
     import Vue from 'vue'
     import Constants from '@/utils/constants'
+    import Datatables from "@/utils/datatables";
+    import Basic from "@/utils/basic";
 
     export default {
         name: "User",
         mounted: function () {
             this.$nextTick(function () {
-                $("#user").DataTable({
-                    processing: true,
-                    serverSide: true,
-                    pageLength: 20,
-                    ajax: function(data, callback, setting) {
-                        var sortColumn = setting["aoColumns"][data.order[0].column]["mData"]
-                        var sortDir = data.order[0].dir.toUpperCase()
-                        var params = "page=" + (data.start / data.length) + "&size=" + data.length + "&sort=" + sortColumn + "," + sortDir
-                        if (data.search.value != null && data.search.value.length > 0) {
-                            params += "&search=" + data.search.value
+                const editor = new $.fn.dataTable.Editor({
+                    // ajax: '/user',
+                    ajax: function (method, url, editor, success, error) {
+                        console.log(editor);
+                        let action = editor.action;
+                        if (action === "create") {
+
                         }
-                        var result = {}
-                        Vue.axios.get("/users?" + params).then(response => {
-                            result.draw = data.draw
-                            result.recordsTotal = 0
-                            result.recordsFiltered = 0
-                            result.data = []
-                            if (typeof (response.data["_embedded"]) !== "undefined") {
-                                var page = response.data.page;
-                                var resources = response.data._embedded.userResourceList
-                                resources = $(resources).map(function () {
-                                    return this.user
-                                }).get()
-                                result.recordsTotal = page.totalElements
-                                result.recordsFiltered = page.totalElements
-                                result.data = resources
-                            }
+                    },
+                    table: '#user',
+                    idSrc: 'username',
+                    fields: [
+                        {label: "用户名", name: "username"}
+                    ],
+                    i18n: Constants.editor.i18n.zh_CN
+                }).on("initEdit", function () {
+                    editor.field("username").disable();
+                });
+
+
+                $("#user").DataTable(Datatables.options({
+                    ajax: function (data, callback, setting) {
+                        const params = Datatables.pageable(data, callback, setting);
+                        if (Basic.notNull(data.search.value) && Basic.notBlank(data.search.value)) {
+                            params.search = data.search.value;
+                        }
+
+                        let result = {};
+                        Vue.axios.get("/users", {
+                            params: params
+                        }).then(response => {
+                            result = Datatables.result(data.draw, response.data.page.totalElements, response.data._embedded.userResourceList);
                             callback(result)
-                        })
+                        });
                     },
                     columns: [
-                        { data: "username" },
+                        {data: "username"},
                         {
                             data: "authorities",
                             orderable: false,
@@ -95,15 +102,12 @@
                             }
                         },
                     ],
-                    pagingType: 'full_numbers',
-                    language: {
-                        url: '//cdn.datatables.net/plug-ins/1.10.15/i18n/Chinese.json'
-                    },
-                    select: {
-                        style: 'os',
-                        info: false
-                    }
-                })
+                    buttons: [
+                        {extend: 'create', editor: editor, text: '创建'},
+                        {extend: 'edit', editor: editor, text: '编辑'},
+                        {extend: 'remove', editor: editor, text: '删除'}
+                    ]
+                }));
             });
         }
     }
