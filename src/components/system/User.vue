@@ -22,8 +22,8 @@
 </template>
 
 <script>
-    import Vue from 'vue'
-    import Constants from '@/utils/constants'
+    import Vue from 'vue';
+    import Constants from '@/utils/constants';
     import Datatables from "@/utils/datatables";
     import Basic from "@/utils/basic";
 
