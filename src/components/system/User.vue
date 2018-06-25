@@ -43,11 +43,26 @@
                     table: '#user',
                     idSrc: 'username',
                     fields: [
-                        {label: "用户名", name: "username"}
+                        { label: "用户名", name: "username" },
+                        {
+                            label: "角色",
+                            name: "role",
+                            type: "select2",
+                            options: [
+                                { label: "Alaska", value: "Alaska" },
+                                { label: "California", value: "California" },
+                                { label: "Delaware", value: "Delaware" }
+                            ],
+                            config: {
+                                placeholder: 'This is my placeholder',
+                                allowClear: true
+                            }
+                        }
                     ],
                     i18n: Constants.editor.i18n.zh_CN
-                }).on("initEdit", function () {
-                    editor.field("username").disable();
+                }).on("open", function (event, main) {
+                    console.log(main);
+                    // editor.field("username").disable();
                 });
 
 

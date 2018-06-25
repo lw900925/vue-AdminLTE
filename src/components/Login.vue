@@ -57,7 +57,7 @@
         mounted: function () {
             this.$nextTick(function () {
                 // iCheck plugin
-                $('input[type="checkbox"]').iCheck({
+                var icheck = $('input[type="checkbox"]').iCheck({
                     checkboxClass: 'icheckbox_square-blue',
                     radioClass: 'iradio_square-blue',
                     increaseArea: '20%' // optional
@@ -90,7 +90,7 @@
                     }
                     this.$router.push(redirect);
                 }).catch(error => {
-                    console.error(error)
+                    // console.error(error)
                 })
             }
         }

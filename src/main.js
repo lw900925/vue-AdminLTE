@@ -4,6 +4,11 @@
 import '@/plugins/bootstrap-3.3.6/css/bootstrap.min.css'
 import '@/plugins/font-awesome-4.6.3/css/font-awesome.min.css'
 import '@/plugins/ionicons-2.0.0/css/ionicons.min.css'
+import '@/plugins/select2-4.0.3/css/select2.min.css'
+import '@/plugins/iCheck-1.0.1/all.css'
+import '@/plugins/AdminLTE-2.3.11/css/AdminLTE.min.css'
+import '@/plugins/AdminLTE-2.3.11/css/skins/_all-skins.min.css'
+
 import '@/plugins/DataTables-1.10.13/media/css/dataTables.bootstrap.min.css'
 import '@/plugins/DataTables-1.10.13/extensions/Buttons/css/buttons.dataTables.min.css'
 import '@/plugins/DataTables-1.10.13/extensions/Buttons/css/buttons.bootstrap.min.css'
@@ -12,16 +17,13 @@ import '@/plugins/DataTables-1.10.13/extensions/Select/css/select.bootstrap.min.
 import '@/plugins/DataTables-1.10.13/extensions/Scroller/css/scroller.dataTables.min.css'
 import '@/plugins/DataTables-1.10.13/extensions/Scroller/css/scroller.bootstrap.min.css'
 import '@/plugins/DataTables-1.10.13/extensions/Editor-1.6.1/css/editor.bootstrap.min.css'
-import '@/plugins/iCheck-1.0.1/all.css'
-import '@/plugins/select2-4.0.3/css/select2.min.css'
-import '@/plugins/AdminLTE-2.3.11/css/AdminLTE.min.css'
-import '@/plugins/AdminLTE-2.3.11/css/skins/_all-skins.min.css'
 
 // import javascript
 import '@/plugins/jQuery-2.2.3/jquery.min'
 import '@/plugins/bootstrap-3.3.6/js/bootstrap.min'
-import '@/plugins/AdminLTE-2.3.11/js/app.min'
+import '@/plugins/select2-4.0.3/js/select2.full.min'
 import '@/plugins/iCheck-1.0.1/icheck.min'
+import '@/plugins/AdminLTE-2.3.11/js/app.min'
 
 import '@/plugins/DataTables-1.10.13/media/js/jquery.dataTables.min'
 import '@/plugins/DataTables-1.10.13/media/js/dataTables.bootstrap.min'
@@ -34,7 +36,8 @@ import '@/plugins/DataTables-1.10.13/extensions/Select/js/dataTables.select.min'
 import '@/plugins/DataTables-1.10.13/extensions/Scroller/js/dataTables.scroller.min'
 import '@/plugins/DataTables-1.10.13/extensions/Editor-1.6.1/js/dataTables.editor.min'
 import '@/plugins/DataTables-1.10.13/extensions/Editor-1.6.1/js/editor.bootstrap.min'
-import '@/plugins/select2-4.0.3/js/select2.full.min'
+
+import '@/plugins/DataTables-1.10.13/extensions/Editor-1.6.1/plugins/editor.select2'
 
 import Vue from 'vue'
 import VueCookies from 'vue-cookies'
