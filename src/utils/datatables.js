@@ -26,5 +26,9 @@ export default {
             recordsFiltered: Basic.notNull(total) ? total : 0,
             data: Basic.notNull(total) ? data : []
         }
+    },
+
+    Editor: {
+
     }
 }

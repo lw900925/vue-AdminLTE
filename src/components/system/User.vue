@@ -24,7 +24,7 @@
 <script>
     import Vue from 'vue';
     import Constants from '@/utils/constants';
-    import Datatables from "@/utils/datatables";
+    import DataTables from "@/utils/datatables";
     import Basic from "@/utils/basic";
 
     export default {
@@ -32,7 +32,6 @@
         mounted: function () {
             this.$nextTick(function () {
                 const editor = new $.fn.dataTable.Editor({
-                    // ajax: '/user',
                     ajax: function (method, url, editor, success, error) {
                         console.log(editor);
                         let action = editor.action;
@@ -57,18 +56,21 @@
                                 placeholder: 'This is my placeholder',
                                 allowClear: true
                             }
-                        }
+                        },
+                        { label: "简介", name: "content", type: "textarea" }
                     ],
                     i18n: Constants.editor.i18n.zh_CN
-                }).on("open", function (event, main) {
-                    console.log(main);
-                    // editor.field("username").disable();
+                }).on("open", function (event, main, action) {
+                    $("textarea", editor.s.fields["content"].dom.container).tinymce({
+                        theme: "modern",
+                        skin_url: "https://cdn.bootcss.com/tinymce/4.7.13/skins/lightgray"
+                    });
                 });
 
 
-                $("#user").DataTable(Datatables.options({
+                $("#user").DataTable(DataTables.options({
                     ajax: function (data, callback, setting) {
-                        const params = Datatables.pageable(data, callback, setting);
+                        const params = DataTables.pageable(data, callback, setting);
                         if (Basic.notNull(data.search.value) && Basic.notBlank(data.search.value)) {
                             params.search = data.search.value;
                         }
@@ -77,7 +79,8 @@
                         Vue.axios.get("/users", {
                             params: params
                         }).then(response => {
-                            result = Datatables.result(data.draw, response.data.page.totalElements, response.data._embedded.userResourceList);
+                            const data = response.data._embedded ? response.data._embedded.userResourceList : [];
+                            result = DataTables.result(data.draw, response.data.page.totalElements, data);
                             callback(result)
                         });
                     },
@@ -120,7 +123,13 @@
                     buttons: [
                         {extend: 'create', editor: editor, text: '创建'},
                         {extend: 'edit', editor: editor, text: '编辑'},
-                        {extend: 'remove', editor: editor, text: '删除'}
+                        {extend: 'remove', editor: editor, text: '删除'},
+                        {
+                            text: '刷新',
+                            action: function (event, datatable, node, config) {
+                                alert('你点击了这个按钮')
+                            }
+                        }
                     ]
                 }));
             });

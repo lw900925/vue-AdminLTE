@@ -19,12 +19,9 @@ import PageNotFound from '@/components/PageNotFound'
 import Enterprise from '@/components/base/Enterprise'
 import Factory from '@/components/base/Factory'
 
-import Prize from '@/components/promotion/Prize'
-import Weixin from '@/components/promotion/Weixin'
-
 import User from '@/components/system/User'
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 export default new VueRouter({
     routes: [
@@ -51,16 +48,6 @@ export default new VueRouter({
                 {
                     path: '/base/factory',
                     component: Factory
-                },
-
-                // 营销活动
-                {
-                    path: '/promotion/prize',
-                    component: Prize
-                },
-                {
-                    path: '/promotion/weixin',
-                    component: Weixin
                 },
 
                 // 系统管理

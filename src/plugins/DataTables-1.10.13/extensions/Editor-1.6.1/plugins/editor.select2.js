@@ -63,16 +63,16 @@
             conf._input = $(dom);
 
             const select2Options = conf.config;
-            $('select', conf._input).select2(select2Options);
+            $("select", conf._input).select2(select2Options);
             return conf._input;
         },
 
         get: function (conf) {
-            return $(conf._input).val();
+            return $("select", conf._input).val();
         },
 
         set: function (conf, value) {
-            $(conf._input).val(value);
+            $("select", conf._input).val(value);
         },
 
         enable: function ( conf ) {

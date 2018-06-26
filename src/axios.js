@@ -5,7 +5,6 @@ import Constants from './utils/constants';
 
 // vue-axios global settings
 axios.defaults.baseURL = Constants.api.baseURI;
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
 axios.interceptors.request.use(config => {
     // 从cookie中取出access_token

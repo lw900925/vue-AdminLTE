@@ -8,7 +8,7 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="../../assets/avatar.jpg" class="img-circle" alt="User Image">
+                    <img src="@/assets/avatar.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
                     <p>Alexander Pierce</p>
@@ -56,23 +56,6 @@
                     </ul>
                 </li>
 
-                <li class="treeview" :class="{'active': treeview === 'promotion'}">
-                    <a href="#">
-                        <i class="fa fa-ticket"></i> <span>营销活动</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <router-link tag="li" active-class="active" to="/promotion/prize">
-                            <a><i class="fa fa-gift"></i> <span>企业奖品</span></a>
-                        </router-link>
-                        <router-link tag="li" active-class="active" to="/promotion/weixin">
-                            <a><i class="fa fa-weixin"></i> <span>微信公众号</span></a>
-                        </router-link>
-                    </ul>
-                </li>
-
                 <li class="treeview" :class="{'active': treeview === 'system'}">
                     <a href="#">
                         <i class="fa fa-cogs"></i> <span>系统管理</span>
@@ -106,7 +89,7 @@
                 treeview = path.split('/')[0];
             }
 
-            return {treeview: treeview}
+            return { treeview: treeview }
         }
     }
 </script>

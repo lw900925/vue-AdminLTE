@@ -24,6 +24,9 @@ import '@/plugins/bootstrap-3.3.6/js/bootstrap.min'
 import '@/plugins/select2-4.0.3/js/select2.full.min'
 import '@/plugins/iCheck-1.0.1/icheck.min'
 import '@/plugins/AdminLTE-2.3.11/js/app.min'
+import '@/plugins/tinymce-4.7.13/tinymce.min'
+import '@/plugins/tinymce-4.7.13/jquery.tinymce.min'
+import '@/plugins/tinymce-4.7.13/themes/modern/theme.min'
 
 import '@/plugins/DataTables-1.10.13/media/js/jquery.dataTables.min'
 import '@/plugins/DataTables-1.10.13/media/js/dataTables.bootstrap.min'
@@ -49,10 +52,10 @@ import Constants from "@/utils/constants"
 // 引入自定义指令
 import MyDirective from '@/directives/my-directive'
 
-Vue.use(VueCookies)
+Vue.use(VueCookies);
 
 // Vue global settings
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 // 全局路由拦截事件
 router.beforeEach((to, from, next) => {
@@ -72,10 +75,10 @@ router.beforeEach((to, from, next) => {
     } else {
         next()
     }
-})
+});
 
 // 绑定Vue自定义指令
-Vue.directive(MyDirective.name, MyDirective)
+Vue.directive(MyDirective.name, MyDirective);
 
 // 绑定Vue自定义组件
 
@@ -85,5 +88,5 @@ new Vue({
     axios,
     template: '<App />',
     components: {App}
-})
+});
 
