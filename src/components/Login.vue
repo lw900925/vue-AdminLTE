@@ -69,18 +69,29 @@
         },
         methods: {
             login: function () {
-                const params = "grant_type=password&scope=" + Constants.api.oauth2.scope +"&username=" + this.username + "&password=" + this.password
-                this.$http.post("/oauth/token?" + params, null, {
+                const params = {
+                    scope: Constants.api.oauth2.scope,
+                    grant_type: "password",
+                    username: this.username,
+                    password: this.password
+                };
+
+                this.$http.post(Constants.api.oauth2.tokenURI, params, {
                     auth: {
                         username: Constants.api.oauth2.clientId,
                         password: Constants.api.oauth2.clientSecret
                     },
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+                    },
+                    transformRequest: function (data, headers) {
+                        return Object.keys(data).map(function (key) {
+                            return encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+                        }).join("&");
                     }
                 }).then(response => {
                     // 将登录信息存储到cookie中
-                    var access_token = response.data[Constants.api.tokenKey]
+                    const access_token = response.data[Constants.api.tokenKey];
                     this.$cookies.set(Constants.api.tokenKey, access_token, 0)
 
                     // 登录完成后跳转

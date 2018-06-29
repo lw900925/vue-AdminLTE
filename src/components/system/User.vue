@@ -9,10 +9,9 @@
                 <thead>
                 <tr>
                     <th>用户名</th>
+                    <th>昵称</th>
+                    <th>电子邮箱</th>
                     <th>角色</th>
-                    <th>账户过期状态</th>
-                    <th>账户锁定状态</th>
-                    <th>密码过期状态</th>
                     <th>状态</th>
                 </tr>
                 </thead>
@@ -43,6 +42,17 @@
                     idSrc: 'username',
                     fields: [
                         { label: "用户名", name: "username" },
+                        { label: "昵称", name: "displayName" },
+                        { label: "电子邮箱", name: "email" },
+                        {
+                            label: "状态",
+                            name: "enabled",
+                            type: "radio",
+                            options: [
+                                { label: "启用", value: true },
+                                { label: "禁用", value: false }
+                            ]
+                        },
                         {
                             label: "角色",
                             name: "role",
@@ -79,13 +89,14 @@
                         Vue.axios.get("/users", {
                             params: params
                         }).then(response => {
-                            const data = response.data._embedded ? response.data._embedded.userResourceList : [];
-                            result = DataTables.result(data.draw, response.data.page.totalElements, data);
+                            result = DataTables.result(data.draw, response.data.totalElements, response.data.content);
                             callback(result)
                         });
                     },
                     columns: [
-                        {data: "username"},
+                        { data: "username" },
+                        { data: "displayName" },
+                        { data: "email" },
                         {
                             data: "authorities",
                             orderable: false,
@@ -96,29 +107,11 @@
                             }
                         },
                         {
-                            data: "accountNonExpired",
-                            render: function (data, type, row, metadata) {
-                                return data === 1 ? "未过期" : "过期"
-                            }
-                        },
-                        {
-                            data: "accountNonLocked",
-                            render: function (data, type, row, metadata) {
-                                return data === 1 ? "未锁定" : "锁定"
-                            }
-                        },
-                        {
-                            data: "accountNonLocked",
-                            render: function (data, type, row, metadata) {
-                                return data === 1 ? "未过期" : "过期"
-                            }
-                        },
-                        {
                             data: "enabled",
                             render: function (data, type, row, metadata) {
-                                return data === 1 ? "启用" : "禁用"
+                                return data ? "启用" : "禁用"
                             }
-                        },
+                        }
                     ],
                     buttons: [
                         {extend: 'create', editor: editor, text: '创建'},
@@ -138,5 +131,10 @@
 </script>
 
 <style scoped>
-
+    div.modal-dialog {
+        left: 1em;
+        right: 1em;
+        margin-left: 0;
+        width: auto;
+    }
 </style>

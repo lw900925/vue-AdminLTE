@@ -3,8 +3,9 @@
  */
 export default {
     api: {
-        baseURI: 'http://localhost:8080',
+        baseURI: 'http://localhost:8081',
         oauth2: {
+            tokenURI: "http://localhost:8080/oauth/token",
             clientId: "94984796",
             clientSecret: "5ldDM0uAAsCjW5ZN",
             scope: "app"
