@@ -2,6 +2,7 @@ import Vue from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import Constants from './utils/constants';
+import router from './router'
 
 // vue-axios global settings
 axios.defaults.baseURL = Constants.api.baseURI;
@@ -26,7 +27,17 @@ axios.interceptors.response.use(response => {
             case 500 :
                 break;
             case 401 :
+                // 请求未认证，跳转到登陆界面
+                router.push({
+                    path: "/login",
+                    query: {
+                        redirect: router.currentRoute.fullPath
+                    }
+                });
                 break;
+            case 409:
+                // 请求的对象已经存在
+                alert("请求对象已经存在");
             default:
         }
     }

@@ -18,6 +18,8 @@ import '@/plugins/DataTables-1.10.13/extensions/Scroller/css/scroller.dataTables
 import '@/plugins/DataTables-1.10.13/extensions/Scroller/css/scroller.bootstrap.min.css'
 import '@/plugins/DataTables-1.10.13/extensions/Editor-1.6.1/css/editor.bootstrap.min.css'
 
+import '@/assets/style.css'
+
 // import javascript
 import '@/plugins/jQuery-2.2.3/jquery.min'
 import '@/plugins/bootstrap-3.3.6/js/bootstrap.min'
@@ -39,8 +41,6 @@ import '@/plugins/DataTables-1.10.13/extensions/Select/js/dataTables.select.min'
 import '@/plugins/DataTables-1.10.13/extensions/Scroller/js/dataTables.scroller.min'
 import '@/plugins/DataTables-1.10.13/extensions/Editor-1.6.1/js/dataTables.editor.min'
 import '@/plugins/DataTables-1.10.13/extensions/Editor-1.6.1/js/editor.bootstrap.min'
-
-import '@/plugins/DataTables-1.10.13/extensions/Editor-1.6.1/plugins/editor.select2'
 
 import Vue from 'vue'
 import VueCookies from 'vue-cookies'

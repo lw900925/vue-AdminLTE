@@ -123,7 +123,7 @@
                             <!-- The user image in the navbar-->
                             <img src="../../assets/avatar.jpg" class="user-image" alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">{{ userInfo.name }}</span>
+                            <span class="hidden-xs">{{ userInfo.displayName }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
@@ -131,7 +131,7 @@
                                 <img src="../../assets/avatar.jpg" class="img-circle" alt="User Image">
 
                                 <p>
-                                    Alexander Pierce - Web Developer
+                                    {{ userInfo.displayName }} - Web Developer
                                     <small>Member since Nov. 2012</small>
                                 </p>
                             </li>
@@ -153,7 +153,8 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    <!--<a href="#" class="btn btn-default btn-flat">首选项</a>-->
+                                    <router-link tag="a" class="btn btn-default btn-flat" :to="'/' + userInfo.username + '/profile'">首选项</router-link>
                                 </div>
                                 <div class="pull-right">
                                     <a href="javascript:;" class="btn btn-default btn-flat" v-on:click="logout">登出</a>
@@ -173,7 +174,7 @@
 
 <script>
     export default {
-        name: 'header',
+        name: 'Header',
 
         data: function () {
             return {

@@ -67,6 +67,9 @@
                         <router-link tag="li" active-class="active" to="/system/user">
                             <a><i class="fa fa-user"></i> <span>用户</span></a>
                         </router-link>
+                        <router-link tag="li" active-class="active" to="/system/role">
+                            <a><i class="fa fa-user-secret"></i> <span>角色</span></a>
+                        </router-link>
                     </ul>
                 </li>
             </ul>

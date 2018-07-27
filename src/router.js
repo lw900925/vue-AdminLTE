@@ -20,6 +20,9 @@ import Enterprise from '@/components/base/Enterprise'
 import Factory from '@/components/base/Factory'
 
 import User from '@/components/system/User'
+import Role from '@/components/system/Role'
+
+import Profile from '@/components/Profile'
 
 Vue.use(VueRouter);
 
@@ -53,7 +56,25 @@ export default new VueRouter({
                 // 系统管理
                 {
                     path: '/system/user',
-                    component: User
+                    component: User,
+                    meta: {
+                        name: "用户"
+                    }
+                },
+                {
+                    path: '/system/role',
+                    component: Role,
+                    meta: {
+                        name: "角色"
+                    }
+                },
+
+                {
+                    path: '/:username/profile',
+                    component: Profile,
+                    meta: {
+                        name: "首选项"
+                    }
                 }
             ]
         },

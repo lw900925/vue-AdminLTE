@@ -31,50 +31,227 @@
         mounted: function () {
             this.$nextTick(function () {
                 const editor = new $.fn.dataTable.Editor({
-                    ajax: function (method, url, editor, success, error) {
-                        console.log(editor);
-                        let action = editor.action;
-                        if (action === "create") {
+                    ajax: function (method, url, object, successCallback, errorCallback) {
+                        let action = object.action;
+                        let data = object.data;
+                        let output = { data: []};
+                        let param = {};
+                        method = DataTables.Editor.ajaxType(action);
+                        url = "/users";
 
-                        }
+                        $.each(data, function (key, value) {
+                            if (action === "create" || action === "edit") {
+                                param = value;
+                            } else if (action === "remove") {
+                                url += "/" + key;
+                                param = null
+                            }
+                        });
+
+                        output.data.push(param);
+
+                        Vue.axios.request({
+                            method: method,
+                            url: url,
+                            data: param
+                        }).then(response => {
+                            successCallback(output);
+                        }).catch(error => {
+                            const response = error.response;
+                            if (response.status === 400) {
+                                $.each(response.data.data, function (index, element) {
+
+                                });
+                            }
+                            errorCallback();
+                        });
                     },
                     table: '#user',
                     idSrc: 'username',
                     fields: [
-                        { label: "用户名", name: "username" },
-                        { label: "昵称", name: "displayName" },
-                        { label: "电子邮箱", name: "email" },
+                        {
+                            label: "用户名",
+                            name: "username",
+                            validate: ["required"]
+                        },
+                        {
+                            label: "密码",
+                            name: "password",
+                            type: "password"
+                        },
+                        {
+                            label: "昵称",
+                            name: "displayName",
+                        },
+                        {
+                            label: "电子邮箱",
+                            name: "email",
+                        },
+                        {
+                            label: "手机号",
+                            name: "phoneNumber"
+                        },
+                        {
+                            label: "生日",
+                            name: "birthday",
+                            type: "datetime",
+                            opts: {
+                                minDate: new Date("1900-01-01"),
+                                maxDate: new Date(),
+                                showWeekNumber: true
+                            }
+                        },
+                        {
+                            label: "经验值",
+                            name: "",
+                            def: 0,
+                            type: "readonly"
+                        },
                         {
                             label: "状态",
                             name: "enabled",
                             type: "radio",
+                            def: true,
                             options: [
                                 { label: "启用", value: true },
                                 { label: "禁用", value: false }
                             ]
                         },
                         {
-                            label: "角色",
-                            name: "role",
-                            type: "select2",
+                            label: "账号已过期",
+                            name: "accountNonExpired",
+                            type: "radio",
+                            def: true,
                             options: [
-                                { label: "Alaska", value: "Alaska" },
-                                { label: "California", value: "California" },
-                                { label: "Delaware", value: "Delaware" }
-                            ],
-                            config: {
-                                placeholder: 'This is my placeholder',
-                                allowClear: true
-                            }
+                                { label: "未过期", value: true },
+                                { label: "已过期", value: false }
+                            ]
                         },
-                        { label: "简介", name: "content", type: "textarea" }
+                        {
+                            label: "账号已锁定",
+                            name: "accountNonLocked",
+                            type: "radio",
+                            def: true,
+                            options: [
+                                { label: "未锁定", value: true },
+                                { label: "已锁定", value: false }
+                            ]
+                        },
+                        {
+                            label: "密码已过期",
+                            name: "credentialsNonExpired",
+                            type: "radio",
+                            def: true,
+                            options: [
+                                { label: "未过期", value: true },
+                                { label: "已过期", value: false }
+                            ]
+                        },
+                        {
+                            label: "角色",
+                            name: "authorities",
+                            className: "select2",
+                            type: "select",
+                            options: [],
+                            validate: ["required"]
+                        }
                     ],
                     i18n: Constants.editor.i18n.zh_CN
                 }).on("open", function (event, main, action) {
-                    $("textarea", editor.s.fields["content"].dom.container).tinymce({
-                        theme: "modern",
-                        skin_url: "https://cdn.bootcss.com/tinymce/4.7.13/skins/lightgray"
-                    });
+                    // $("textarea", editor.s.fields["content"].dom.container).tinymce({
+                    //     theme: "modern",
+                    //     skin_url: "https://cdn.bootcss.com/tinymce/4.7.13/skins/lightgray"
+                    // });
+
+                    // 渲染表单控件样式
+                    DataTables.Editor.requiredFieldLabel(editor, "render");
+
+                    let authorities = [];
+                    let options = [];
+                    if (action === "edit") {
+                        // 拥有的角色，转换成Option对象，并设置到select2的选项集中
+                        authorities = editor.s.editFields[editor.field("username").val()].data["authorities"];
+                        options = $.map(authorities, function (item) {
+                            return new Option(item.description, item.authority, true, true);
+                        });
+
+                        // 清除密码
+                        editor.field("password").val("");
+
+                        // 用户名不许修改
+                        editor.field("username").disable();
+                    } else {
+                        editor.field("username").enable();
+                    }
+
+                    // 加载角色
+                    $("select", editor.s.fields["authorities"].dom.container).select2({
+                        placeholder: '--- 请选择 ---',
+                        allowClear: true,
+                        multiple: true,
+                        language: "zh-CN",
+                        ajax: {
+                            url: Constants.api.baseURI + "/roles",
+                            type: "GET",
+                            data: {
+                                size: Constants.api.maxRow
+                            },
+                            headers: {
+                                Authorization: "Bearer " + window.$cookies.get(Constants.api.tokenKey)
+                            },
+                            dataType: "json",
+                            processResults: function (response) {
+                                return {
+                                    results: $.map(response.content, function (item) {
+                                        if ($.inArray(item.authority, authorities) > 0) {
+                                            return { id: item.authority, text: item.description, selected: true };
+                                        } else {
+                                            return { id: item.authority, text: item.description };
+                                        }
+                                    })
+                                };
+                            }
+                        }
+                    }).append(options).parent().find("span.select2-container").width("100%");
+
+                }).on("preSubmit", function (event, object, action) {
+                    editor.field("username").enable();
+
+                    if (action === "create" || action === "edit") {
+
+                        let dataKey;
+                        if (action === "create") {
+                            dataKey = "0";
+                        } else if (action === "edit") {
+                            dataKey = editor.field("username").val();
+                        }
+
+                        // 提交之前修改数据
+                        object.data[dataKey].authorities = $.map($("select", editor.s.fields["authorities"].dom.container).val(), function (element) {
+                            return { authority: element }
+                        });
+
+                        // 提交之前对数据校验
+                        const data = object.data[dataKey];
+                        $.each(editor.s.fields, function (index, field) {
+                            let validates = field.s.opts.validate;
+                            $.each(validates, function (index, validate) {
+                                if (validate === "required") {
+                                    if (Basic.isBlank(data[field.s.name]) || ( Basic.notNull(data[field.s.name]) && data[field.s.name].length === 0)) {
+                                        field.error("不能为空");
+                                    }
+                                }
+                            })
+                        });
+                    }
+
+                    if (editor.inError()) {
+                        return false;
+                    }
+                }).on("close", function (event) {
+                    // 清除渲染
+                    DataTables.Editor.requiredFieldLabel(editor, "clear");
+                    $("select", editor.s.fields["authorities"].dom.container).find("option:selected").remove();
                 });
 
 
@@ -102,8 +279,8 @@
                             orderable: false,
                             render: function (data, type, row, metadata) {
                                 return $(data).map(function () {
-                                    return this.authority
-                                }).get().join(",")
+                                    return this.description
+                                }).get().join("，")
                             }
                         },
                         {
@@ -120,7 +297,7 @@
                         {
                             text: '刷新',
                             action: function (event, datatable, node, config) {
-                                alert('你点击了这个按钮')
+                                datatable.draw();
                             }
                         }
                     ]
@@ -131,10 +308,4 @@
 </script>
 
 <style scoped>
-    div.modal-dialog {
-        left: 1em;
-        right: 1em;
-        margin-left: 0;
-        width: auto;
-    }
 </style>

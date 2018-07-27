@@ -9,7 +9,7 @@
 
             <form action="javascript: void(0)" method="post">
                 <div class="form-group has-feedback">
-                    <input type="text" class="form-control" v-model="username" placeholder="用户名">
+                    <input type="text" class="form-control" v-model="username" placeholder="用户名 / 电子邮箱">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
@@ -100,9 +100,7 @@
                         redirect = this.$route.query.redirect;
                     }
                     this.$router.push(redirect);
-                }).catch(error => {
-                    // console.error(error)
-                })
+                });
             }
         }
     }

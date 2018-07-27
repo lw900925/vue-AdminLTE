@@ -29,6 +29,36 @@ export default {
     },
 
     Editor: {
+        ajaxType: function (action) {
+            let type;
+            switch (action) {
+                case "create":
+                    type = "POST";
+                    break;
+                case "edit":
+                    type = "PUT";
+                    break;
+                case "remove":
+                    type = "DELETE";
+                    break;
+                default:
+                    type = "GET";
+                    break;
+            }
+            return type;
+        },
 
+        requiredFieldLabel: function (editor, render) {
+            $.each(editor.s.fields, function (index, field) {
+                let validates = field.s.opts.validate;
+                if ($.inArray("required", validates) >= 0) {
+                    if (render === "render") {
+                        $(field.dom.label).prepend('<span class="text-danger">*</span>')
+                    } else if (render === "clear") {
+                        $(field.dom.label).find("span.text-danger").remove();
+                    }
+                }
+            });
+        }
     }
 }

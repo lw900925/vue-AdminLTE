@@ -10,7 +10,8 @@ export default {
             clientSecret: "5ldDM0uAAsCjW5ZN",
             scope: "app"
         },
-        tokenKey: "access_token"
+        tokenKey: "access_token",
+        maxRow: 2147483647
     },
 
     editor: {
