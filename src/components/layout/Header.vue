@@ -121,14 +121,14 @@
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="../../assets/avatar.jpg" class="user-image" alt="User Image">
+                            <img :src="userInfo.avatarUrl" class="user-image" alt="Avatar">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span class="hidden-xs">{{ userInfo.displayName }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="../../assets/avatar.jpg" class="img-circle" alt="User Image">
+                                <img :src="userInfo.avatarUrl" class="img-circle" alt="Avatar">
 
                                 <p>
                                     {{ userInfo.displayName }} - Web Developer
@@ -157,7 +157,7 @@
                                     <router-link tag="a" class="btn btn-default btn-flat" :to="'/' + userInfo.username + '/profile'">首选项</router-link>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="javascript:;" class="btn btn-default btn-flat" v-on:click="logout">登出</a>
+                                    <a href="javascript:void(0);" class="btn btn-default btn-flat" v-on:click="logout">登出</a>
                                 </div>
                             </li>
                         </ul>

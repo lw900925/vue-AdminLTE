@@ -18,6 +18,8 @@ import '@/plugins/DataTables-1.10.13/extensions/Scroller/css/scroller.dataTables
 import '@/plugins/DataTables-1.10.13/extensions/Scroller/css/scroller.bootstrap.min.css'
 import '@/plugins/DataTables-1.10.13/extensions/Editor-1.6.1/css/editor.bootstrap.min.css'
 
+import "toastr/build/toastr.min.css"
+
 import '@/assets/style.css'
 
 // import javascript

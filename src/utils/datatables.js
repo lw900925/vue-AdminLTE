@@ -59,6 +59,19 @@ export default {
                     }
                 }
             });
+        },
+
+        validate: function (editor, data) {
+            $.each(editor.s.fields, function (index, field) {
+                let validates = field.s.opts.validate;
+                $.each(validates, function (index, validate) {
+                    if (validate === "required") {
+                        if (Basic.isBlank(data[field.s.name]) || ( Basic.notNull(data[field.s.name]) && data[field.s.name].length === 0)) {
+                            field.error(Constants.message.validate.NOT_NULL);
+                        }
+                    }
+                })
+            });
         }
     }
 }

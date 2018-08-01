@@ -16,9 +16,6 @@ import Login from '@/components/Login'
 import Dashboard from '@/components/Dashboard'
 import PageNotFound from '@/components/PageNotFound'
 
-import Enterprise from '@/components/base/Enterprise'
-import Factory from '@/components/base/Factory'
-
 import User from '@/components/system/User'
 import Role from '@/components/system/Role'
 
@@ -40,17 +37,10 @@ export default new VueRouter({
             children: [
                 {
                     path: '/dashboard',
-                    component: Dashboard
-                },
-
-                // 基础信息管理
-                {
-                    path: '/base/enterprise',
-                    component: Enterprise
-                },
-                {
-                    path: '/base/factory',
-                    component: Factory
+                    component: Dashboard,
+                    meta: {
+                        name: "仪表盘"
+                    }
                 },
 
                 // 系统管理

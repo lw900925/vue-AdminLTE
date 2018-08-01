@@ -77,5 +77,20 @@ export default {
             style: 'os',
             info: false
         }
+    },
+
+    message: {
+        http: {
+            INTERNAL_SERVER_ERROR: "服务器内部错误",
+            UNAUTHORIZED: "请求未授权",
+            CONFLICT: "对象已经存在",
+            BAD_REQUEST: "请求参数不正确",
+
+            BAD_CREDENTIALS: "密码错误"
+        },
+
+        validate: {
+            NOT_NULL: "不能为空"
+        }
     }
 }

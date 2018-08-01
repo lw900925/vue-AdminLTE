@@ -3,6 +3,7 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import Constants from './utils/constants';
 import router from './router'
+import toastr from "toastr";
 
 // vue-axios global settings
 axios.defaults.baseURL = Constants.api.baseURI;
@@ -23,8 +24,14 @@ axios.interceptors.response.use(response => {
         // 处理错误
         switch (error.response.status) {
             case 400 :
+                if (error.response.data["error"] === "invalid_grant") {
+                    toastr.error(Constants.message.http.BAD_CREDENTIALS);
+                } else {
+                    toastr.error(error.response.data["message"]);
+                }
                 break;
             case 500 :
+                toastr.error(Constants.message.http.INTERNAL_SERVER_ERROR);
                 break;
             case 401 :
                 // 请求未认证，跳转到登陆界面
@@ -34,10 +41,11 @@ axios.interceptors.response.use(response => {
                         redirect: router.currentRoute.fullPath
                     }
                 });
+                toastr.error(Constants.message.http.UNAUTHORIZED);
                 break;
             case 409:
                 // 请求的对象已经存在
-                alert("请求对象已经存在");
+                toastr.error(Constants.message.http.CONFLICT);
             default:
         }
     }

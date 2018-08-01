@@ -57,12 +57,6 @@
                         }).then(response => {
                             successCallback(output);
                         }).catch(error => {
-                            const response = error.response;
-                            if (response.status === 400) {
-                                $.each(response.data.data, function (index, element) {
-
-                                });
-                            }
                             errorCallback();
                         });
                     },
@@ -154,6 +148,11 @@
                             type: "select",
                             options: [],
                             validate: ["required"]
+                        },
+                        {
+                            label: "头像",
+                            name: "avatarUrl",
+                            type: "hidden"
                         }
                     ],
                     i18n: Constants.editor.i18n.zh_CN
@@ -232,17 +231,7 @@
                         });
 
                         // 提交之前对数据校验
-                        const data = object.data[dataKey];
-                        $.each(editor.s.fields, function (index, field) {
-                            let validates = field.s.opts.validate;
-                            $.each(validates, function (index, validate) {
-                                if (validate === "required") {
-                                    if (Basic.isBlank(data[field.s.name]) || ( Basic.notNull(data[field.s.name]) && data[field.s.name].length === 0)) {
-                                        field.error("不能为空");
-                                    }
-                                }
-                            })
-                        });
+                        DataTables.Editor.validate(editor, object.data[dataKey]);
                     }
 
                     if (editor.inError()) {
