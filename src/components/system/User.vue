@@ -96,12 +96,6 @@
                             }
                         },
                         {
-                            label: "经验值",
-                            name: "",
-                            def: 0,
-                            type: "readonly"
-                        },
-                        {
                             label: "状态",
                             name: "enabled",
                             type: "radio",
