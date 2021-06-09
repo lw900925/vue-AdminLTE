@@ -35,17 +35,24 @@ axios.interceptors.response.use(response => {
                 break;
             case 401 :
                 // 请求未认证，跳转到登陆界面
-                router.push({
-                    path: "/login",
-                    query: {
-                        redirect: router.currentRoute.fullPath
-                    }
-                });
+                if (router.history.current.path != '/login') {
+                    router.push({
+                        path: "/login",
+                        query: {
+                            redirect: router.currentRoute.fullPath
+                        }
+                    });
+                }
                 toastr.error(Constants.message.http.UNAUTHORIZED);
                 break;
-            case 409:
+            case 403 :
+                // 请求未授权
+                toastr.error(Constants.message.http.ACCESS_DENIED);
+                break;
+            case 409 :
                 // 请求的对象已经存在
                 toastr.error(Constants.message.http.CONFLICT);
+                break;
             default:
         }
     }

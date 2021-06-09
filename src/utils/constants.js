@@ -74,7 +74,7 @@ export default {
             url: '//cdn.datatables.net/plug-ins/1.10.15/i18n/Chinese.json'
         },
         select: {
-            style: 'os',
+            style: 'single',
             info: false
         }
     },
@@ -82,7 +82,8 @@ export default {
     message: {
         http: {
             INTERNAL_SERVER_ERROR: "服务器内部错误",
-            UNAUTHORIZED: "请求未授权",
+            UNAUTHORIZED: "请求未认证",
+            ACCESS_DENIED: "请求未授权",
             CONFLICT: "对象已经存在",
             BAD_REQUEST: "请求参数不正确",
 

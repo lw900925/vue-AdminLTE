@@ -144,8 +144,19 @@
                             validate: ["required"]
                         },
                         {
-                            label: "头像",
                             name: "avatarUrl",
+                            type: "hidden"
+                        },
+                        {
+                            name: "profile.theme",
+                            type: "hidden"
+                        },
+                        {
+                            name: "profile.language",
+                            type: "hidden"
+                        },
+                        {
+                            name: "profile.username",
                             type: "hidden"
                         }
                     ],

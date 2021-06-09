@@ -18,6 +18,7 @@ import PageNotFound from '@/components/PageNotFound'
 
 import User from '@/components/system/User'
 import Role from '@/components/system/Role'
+import Resource from '@/components/system/Resource'
 
 import Profile from '@/components/Profile'
 
@@ -56,6 +57,13 @@ export default new VueRouter({
                     component: Role,
                     meta: {
                         name: "角色"
+                    }
+                },
+                {
+                    path: '/system/resource',
+                    component: Resource,
+                    meta: {
+                        name: "资源"
                     }
                 },
 

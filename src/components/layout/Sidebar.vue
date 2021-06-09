@@ -26,6 +26,9 @@
                         <router-link tag="li" active-class="active" to="/system/role">
                             <a><i class="fa fa-user-secret"></i> <span>角色</span></a>
                         </router-link>
+                        <router-link tag="li" active-class="active" to="/system/resource">
+                            <a><i class="fa fa-database"></i> <span>资源</span></a>
+                        </router-link>
                     </ul>
                 </li>
             </ul>
